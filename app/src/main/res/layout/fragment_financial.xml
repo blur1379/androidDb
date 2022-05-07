@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="امور مالی"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="25sp"
+                    android:layout_margin="16dp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/inancialEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/background_edt"
+                    android:hint="مبلغ را به تومان وارد کنید"
+                    android:gravity="right"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="روش پرداخت را انتخاب کنید:"
+                    android:layout_margin="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right">
+
+                    <RadioButton
+                        android:id="@+id/radioCheck"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="چک"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radioBank"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="حساب بانکی"
+                        android:checked="false" />
+
+                    <RadioButton
+                        android:id="@+id/radioCash"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="پول نقد"
+                        android:checked="false" />
+
+
+
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@android:color/holo_red_light"
+                    android:layout_margin="8dp"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="نوع عملیات را انتخاب کنید:"
+                    android:layout_margin="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right">
+
+                    <RadioButton
+                        android:id="@+id/radioCredit"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="واریز"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radioDebit"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="برداشت"
+                        android:checked="false" />
+
+
+                </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/financialSubmitBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="ثبت"/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_user">
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.example.ghasedcoffee.ui.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/navigation_financial"
+        android:name="com.example.ghasedcoffee.ui.FinancialFragment"
+        android:label="@string/title_financial"
+        tools:layout="@layout/fragment_financial" />
+
+    <fragment
+        android:id="@+id/navigation_store"
+        android:name="com.example.ghasedcoffee.ui.StoreFragment"
+        android:label="@string/title_store"
+        tools:layout="@layout/fragment_store" />
+    <fragment
+        android:id="@+id/navigation_report"
+        android:name="com.example.ghasedcoffee.ui.ReportFragment"
+        android:label="@string/title_report"
+        tools:layout="@layout/fragment_report" />
+</navigation>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GhasedCoffee</string>
+    <string name="title_user">User</string>
+    <string name="title_financial">Financial</string>
+    <string name="title_store">store</string>
+    <string name="title_report">Report</string>
+</resources>
