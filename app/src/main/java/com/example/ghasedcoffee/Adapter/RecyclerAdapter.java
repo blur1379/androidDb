@@ -37,7 +37,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
 
         holder.binding.userName.setText( users.get(position).name) ;
         holder.binding.userPhone.setText(users.get(position).phone);
-
+        holder.binding.isSeller.setText(users.get(position).isSeller ? "فروشنده": "خریدار");
 
     }
 

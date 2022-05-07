@@ -1,6 +1,7 @@
 package com.example.ghasedcoffee;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.ghasedcoffee.Model.Financial;
 import com.example.ghasedcoffee.Model.Store;
@@ -16,12 +17,18 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.ghasedcoffee.databinding.ActivityMainBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     public DatabaseManager dbm;
+    private String todayDate = "";
+
 
 
     @Override
@@ -41,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
         dbm = new DatabaseManager(this);
+
+
+
     }
 // metods for database
     public void insertUser(User user){
@@ -50,10 +60,22 @@ public class MainActivity extends AppCompatActivity {
         return dbm.getUsers();
     }
     public void  insertFinancial(Financial financial){
+        Date c = Calendar.getInstance().getTime(); //Sat Apr 09 11:29:58 GMT+04:30 2022
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
+        todayDate = df.format(c); // 2022-4-9
+        Log.d("blur", "onCreate date: " + todayDate);
+        financial.date = todayDate;
         dbm.insertFinancial(financial);
+    }
+
+    public ArrayList<Financial> getFinancial(String date , String endDate ){
+        return dbm.getFinancial(date , endDate);
     }
     public void insertStore(Store store){
         dbm.insertStore(store);
+    }
+    public ArrayList<Store> getStore(){
+        return dbm.getStore();
     }
 
 }

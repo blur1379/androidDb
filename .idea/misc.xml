@@ -17,9 +17,11 @@
         <entry key="app/src/main/res/layout/fragment_financial.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1515625" />
-        <entry key="app/src/main/res/layout/fragment_report.xml" value="0.26403985507246375" />
+        <entry key="app/src/main/res/layout/fragment_report.xml" value="0.11226959228515626" />
         <entry key="app/src/main/res/layout/fragment_store.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25885416666666666" />
+        <entry key="app/src/main/res/layout/item_store_recycler.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/items_finencial_recycler.xml" value="0.14447463768115942" />
         <entry key="app/src/main/res/layout/items_recycler.xml" value="0.26403985507246375" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.140625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1505" />

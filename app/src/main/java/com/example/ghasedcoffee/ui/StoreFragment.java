@@ -31,12 +31,12 @@ public class StoreFragment extends Fragment {
                 store.commodity = binding.commodityNameEdt.getText().toString();
                 store.Amount = binding.commodityAmountEdt.getText().toString();
                 if (binding.radioKilogram.isChecked()){
-                    store.unit = "kilogram";
+                    store.unit = "کیلوگرم";
                 }else if (binding.radioLiter.isChecked()){
-                    store.unit = "liter";
+                    store.unit = "لیتر";
 
                 }else {
-                    store.unit = "num";
+                    store.unit = "تعداد";
                 }
                 ((MainActivity)getActivity()).insertStore(store);
                 Toast.makeText(getActivity(),"محصول با موفقیت ثبت شد" , Toast.LENGTH_SHORT).show();

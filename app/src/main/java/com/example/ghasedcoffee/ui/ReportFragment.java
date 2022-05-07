@@ -1,11 +1,12 @@
 package com.example.ghasedcoffee.ui;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,8 +16,12 @@ import androidx.transition.Slide;
 import androidx.transition.Transition;
 import androidx.transition.TransitionManager;
 
+import com.example.ghasedcoffee.Adapter.FinancialRecyclerAdapter;
 import com.example.ghasedcoffee.Adapter.RecyclerAdapter;
+import com.example.ghasedcoffee.Adapter.StoreRecyclerAdapter;
 import com.example.ghasedcoffee.MainActivity;
+import com.example.ghasedcoffee.Model.Financial;
+import com.example.ghasedcoffee.Model.Store;
 import com.example.ghasedcoffee.Model.User;
 import com.example.ghasedcoffee.databinding.FragmentReportBinding;
 
@@ -29,19 +34,18 @@ public class ReportFragment extends Fragment {
 //    private Context context = this;
     //adapter
     private RecyclerAdapter adapter;
+    private StoreRecyclerAdapter storeRecyclerAdapter;
+    private FinancialRecyclerAdapter financialRecyclerAdapter;
     //list
     private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<Financial> financials = new ArrayList<>();
+    private ArrayList<Store> stores = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentReportBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-//        binding.textDashboard.setOnClickListener(v -> {
-//            ((MainActivity)getActivity()).getUser();
-//        });
-//        final TextView textView = binding.textDashboard;
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         setData();
 
@@ -52,11 +56,40 @@ public class ReportFragment extends Fragment {
         binding.recycler.setLayoutManager(layoutManager);
         binding.recycler.setHasFixedSize(true);
 
+        storeRecyclerAdapter = new StoreRecyclerAdapter(stores);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL , false);
+        binding.storeRecycler.setAdapter(storeRecyclerAdapter);
+        binding.storeRecycler.setLayoutManager(layoutManager1);
+        binding.storeRecycler.setHasFixedSize(true);
+
+        financialRecyclerAdapter = new FinancialRecyclerAdapter(financials);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL , false);
+        binding.financialRecycler.setAdapter(financialRecyclerAdapter);
+        binding.financialRecycler.setLayoutManager(layoutManager2);
+        binding.financialRecycler.setHasFixedSize(true);
+
         //click listeners
         binding.fab.setOnClickListener(view -> toggle(binding.dateLay));
 
+        binding.finencialFab.setOnClickListener(v -> {
+            binding.recycler.setVisibility(View.GONE);
+            binding.storeRecycler.setVisibility(View.GONE);
+            binding.financialRecycler.setVisibility(View.VISIBLE);
+        });
+        binding.storeFab.setOnClickListener(v -> {
+            binding.recycler.setVisibility(View.GONE);
+            binding.storeRecycler.setVisibility(View.VISIBLE);
+            binding.financialRecycler.setVisibility(View.GONE);
+        });
+        binding.userFab.setOnClickListener(v -> {
+            binding.recycler.setVisibility(View.VISIBLE);
+            binding.storeRecycler.setVisibility(View.GONE);
+            binding.financialRecycler.setVisibility(View.GONE);
+        });
+        binding.searchBtn.setOnClickListener(this::searchBtnOnClick);
 
         return root;
+
     }
 
     @Override
@@ -81,5 +114,30 @@ public class ReportFragment extends Fragment {
     public void setData() {
 
         users = ((MainActivity)getActivity()).getUser();
+        financials = ((MainActivity)getActivity()).getFinancial("","");
+        stores = ((MainActivity)getActivity()).getStore();
+    }
+
+    private void searchBtnOnClick(View v) {
+        if (!binding.startDay.getText().toString().isEmpty() &&
+                !binding.startMonth.getText().toString().isEmpty() &&
+                !binding.startYear.getText().toString().isEmpty() &&
+                !binding.endtDay.getText().toString().isEmpty() &&
+                !binding.endMonth.getText().toString().isEmpty() &&
+                !binding.endYear.getText().toString().isEmpty()) {
+            String date = binding.startYear.getText().toString() + "-" + binding.startMonth.getText().toString() + "-" + binding.startDay.getText().toString();
+
+            financials = ((MainActivity) getActivity()).getFinancial(date, binding.endYear.getText().toString() + "-" + binding.endMonth.getText().toString() + "-" + binding.endtDay.getText().toString());
+            financialRecyclerAdapter.notifyDataSetChanged();
+            Log.d("blur", "onCreateView: search object " + financials.size());
+        } else {
+            Toast.makeText(getActivity(), "تمامی فیلد های تاریخ را پر کنید", Toast.LENGTH_SHORT).show();
+        }
+
+
+        binding.recycler.setVisibility(View.GONE);
+        binding.storeRecycler.setVisibility(View.GONE);
+        binding.financialRecycler.setVisibility(View.VISIBLE);
+
     }
 }

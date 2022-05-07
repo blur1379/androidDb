@@ -20,7 +20,7 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/finencial_credit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="غزل"
@@ -29,7 +29,7 @@
                 android:gravity="right" />
 
             <TextView
-                android:id="@+id/userPhone"
+                android:id="@+id/financial_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="09103538173"
@@ -38,7 +38,7 @@
                 android:textColor="@android:color/holo_blue_dark"/>
 
             <TextView
-                android:id="@+id/is_seller"
+                android:id="@+id/financial_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="فروشنده"

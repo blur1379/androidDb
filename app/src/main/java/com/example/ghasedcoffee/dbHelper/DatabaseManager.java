@@ -50,7 +50,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String userQuery = "CREATE TABLE "+ UserTableName +" ("+ userID +" INTEGER PRIMARY KEY, "+ userName +" VARCHAR , "+ userPhone +" TEXT ,"+ userIsSeller +" BOOLEAN); ";
         String storeQuery = "CREATE TABLE "+ StoreTableName +" ("+ storeID +" INTEGER PRIMARY KEY, "+ storeAmount +" DOUBLE , "+ storeUnit +" TEXT ," + storeCommodity + " VARCHAR ); ";
-        String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDate + " DATE ); ";
+        String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDate + " TEXT ); ";
         db.execSQL(userQuery);
         db.execSQL(storeQuery);
         db.execSQL(financialQuery);
@@ -111,8 +111,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
             user.id = gCur.getString(gCur.getColumnIndex(userID));
             user.name = gCur.getString(gCur.getColumnIndex(userName));
             user.phone = gCur.getString(gCur.getColumnIndex(userPhone));
-            user.isSeller = gCur.getInt(gCur.getColumnIndex(userID)) > 0 ;
-            Log.d("blurUser", "getUsers: " + " " + user.id + " " + user.name + " " + user.phone);
+            user.isSeller = gCur.getInt(gCur.getColumnIndex(userIsSeller)) > 0 ;
+            Log.d("blurUser", "getUsers: " + " " + user.id + " " + user.name + " " + user.phone );
 
             users.add(user);
             gCur.moveToNext();
@@ -138,10 +138,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return stores;
     }
     @SuppressLint("Range")
-    public ArrayList<Financial> getFinancial(){
+    public ArrayList<Financial> getFinancial(String date , String endDate){
         ArrayList<Financial> financials = new ArrayList<>();
         SQLiteDatabase gdb = this.getReadableDatabase();
-        String gQuery  = "SELECT * FROM "+ FinancialTableName +";";
+        String gQuery = "SELECT * FROM "+ FinancialTableName ;
+        if (!date.isEmpty()|| !endDate.isEmpty()){
+                gQuery  += " WHERE "+ financialDate + "<= '"+endDate+"' AND "+financialDate + ">= '"+date+"'";
+        }
+        gQuery += ";";
+        Log.d("blur", "getFinancial: " + gQuery);
+
+
         Cursor gCur = gdb.rawQuery(gQuery,null);
         gCur.moveToFirst();
         while(!gCur.isAfterLast()) {
@@ -149,7 +156,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
             financial.id = gCur.getString(gCur.getColumnIndex(financialID));
             financial.credit = gCur.getString(gCur.getColumnIndex(financialCredit));
             financial.type = gCur.getString(gCur.getColumnIndex(financialType));
+            financial.date = gCur.getString(gCur.getColumnIndex(financialDate));
             financials.add(financial);
+            Log.d("blur", "getFinancial: " + financial.date);
             gCur.moveToNext();
         }
         return financials;

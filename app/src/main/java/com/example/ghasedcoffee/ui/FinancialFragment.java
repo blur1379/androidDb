@@ -34,11 +34,11 @@ public class FinancialFragment extends Fragment {
                     financial.credit = "-" + binding.inancialEdt.getText().toString();
                 }
                 if (binding.radioBank.isChecked()){
-                    financial.type = "bank";
+                    financial.type = "حساب بانکی";
                 }else if (binding.radioCash.isChecked()){
-                    financial.type = "cash";
+                    financial.type = "پول نقد";
                 }else{
-                    financial.type = "chek";
+                    financial.type = "چک";
                 }
                 ((MainActivity)getActivity()).insertFinancial(financial);
                 Toast.makeText(getActivity(),"تراکنش با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
@@ -46,11 +46,7 @@ public class FinancialFragment extends Fragment {
                 Toast.makeText(getActivity(),"تمامی فیلد ها را تکمیل کنید", Toast.LENGTH_SHORT).show();
             }
         });
-//        binding.textDashboard.setOnClickListener(v -> {
-//            ((MainActivity)getActivity()).getUser();
-//        });
-//        final TextView textView = binding.textDashboard;
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 

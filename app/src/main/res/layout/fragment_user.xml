@@ -61,8 +61,47 @@
                     android:gravity="right"
                     android:inputType="phone"
                     android:padding="8dp" />
+                <EditText
+                    android:id="@+id/inancialEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/background_edt"
+                    android:hint="مبلغ را به تومان وارد کنید"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:padding="8dp" />
 
 
+
+                <RadioGroup
+                    android:id="@+id/radio1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="vertical"
+                    android:gravity="right">
+
+                    <RadioButton
+                        android:id="@+id/radioC"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="بستانکار"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radioS"
+                        android:layoutDirection="rtl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="بدهکار"
+                        android:checked="false" />
+
+
+
+
+                </RadioGroup>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
