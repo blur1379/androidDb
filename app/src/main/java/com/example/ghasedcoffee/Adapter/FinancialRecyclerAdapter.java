@@ -39,7 +39,7 @@ public class FinancialRecyclerAdapter extends RecyclerView.Adapter<FinancialRecy
 
         holder.binding.finencialCredit.setText( financials.get(position).credit) ;
         holder.binding.financialType.setText(financials.get(position).type);
-        holder.binding.financialDate.setText(financials.get(position).year + "/" +financials.get(position).month + "/" + financials.get(position).day);
+        holder.binding.financialDate.setText(financials.get(position).date);
 
     }
 
