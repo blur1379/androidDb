@@ -23,7 +23,7 @@
                 android:id="@+id/store_commodity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="غزل"
+                android:text="نام محصول"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="right" />
@@ -32,7 +32,7 @@
                 android:id="@+id/store_unit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="09103538173"
+                android:text="واحد"
                 android:textSize="20sp"
                 android:gravity="right"
                 android:textColor="@android:color/holo_blue_dark"/>
@@ -41,10 +41,41 @@
                 android:id="@+id/store_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="فروشنده"
+                android:text="۴۱"
                 android:textSize="20sp"
                 android:gravity="right"
                 android:textColor="@android:color/holo_blue_dark"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/changeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="تغیر مقدار"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_view"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <EditText
+                android:id="@+id/numEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_edt"
+                android:hint="مقدار جدید را وارد کنید"
+                android:gravity="right"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/SubmitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="ثبت مقدار جدید"/>
+        </LinearLayout>
 
 
         </LinearLayout>

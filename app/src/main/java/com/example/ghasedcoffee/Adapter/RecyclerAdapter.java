@@ -2,6 +2,7 @@ package com.example.ghasedcoffee.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -36,9 +37,15 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.binding.userName.setText( users.get(position).name) ;
-        holder.binding.userPhone.setText(users.get(position).phone);
+        holder.binding.userPhone.setText(users.get(position).phone + ":شماره همراه");
         holder.binding.isSeller.setText(users.get(position).isSeller ? "فروشنده": "خریدار");
+        holder.binding.isCreditor.setText(users.get(position).isCreditor ? "بستانکار": "بدهکار");
+        holder.binding.debt.setText(users.get(position).debt + ":مبلغ بدهی یا بستانکاری");
 
+      holder.binding.changeBtn.setOnClickListener(view -> {
+          holder.binding.changeBtn.setVisibility(View.GONE);
+          holder.binding.itemChangeView.setVisibility(View.VISIBLE);
+      });
     }
 
     @Override

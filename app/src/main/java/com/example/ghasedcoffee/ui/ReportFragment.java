@@ -1,6 +1,7 @@
 package com.example.ghasedcoffee.ui;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -114,7 +115,7 @@ public class ReportFragment extends Fragment {
     public void setData() {
 
         users = ((MainActivity)getActivity()).getUser();
-        financials = ((MainActivity)getActivity()).getFinancial("","","","","","");
+        financials = ((MainActivity)getActivity()).getFinancial("","");
         stores = ((MainActivity)getActivity()).getStore();
     }
 
@@ -128,9 +129,10 @@ public class ReportFragment extends Fragment {
             financials.clear();
             String date = binding.startYear.getText().toString() + "-" + binding.startMonth.getText().toString() + "-" + binding.startDay.getText().toString();
 
-            financials = ((MainActivity) getActivity()).getFinancial(binding.startDay.getText().toString() , binding.startMonth.getText().toString() , binding.startYear.getText().toString(), binding.endtDay.getText().toString()  ,binding.endMonth.getText().toString() , binding.endYear.getText().toString());
+            financials.addAll (((MainActivity) getActivity()).getFinancial(binding.startYear.getText().toString()+ "-"+ binding.startMonth.getText().toString() +"-"+ binding.startDay.getText().toString(), binding.endYear.getText().toString() +"-"+binding.endMonth.getText().toString()+"-"+ binding.endtDay.getText().toString()));
             financialRecyclerAdapter.notifyDataSetChanged();
             Log.d("blur", "onCreateView: search object " + financials.size());
+            toggle(binding.dateLay);
         } else {
             Toast.makeText(getActivity(), "تمامی فیلد های تاریخ را پر کنید", Toast.LENGTH_SHORT).show();
         }

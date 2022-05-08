@@ -25,11 +25,16 @@ public class UserFragment extends Fragment {
         binding = FragmentUserBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.userSubmitBtn.setOnClickListener(v -> {
-            if (!binding.userNameEdt.getText().toString().isEmpty() && !binding.userPhoneEdt.getText().toString().isEmpty()){
+            if (!binding.userNameEdt.getText().toString().isEmpty() && !binding.userPhoneEdt.getText().toString().isEmpty() && !binding.financialEdt.getText().toString().isEmpty()){
                 User user = new User();
                 user.name = binding.userNameEdt.getText().toString();
                 user.phone = binding.userPhoneEdt.getText().toString();
                 user.isSeller = binding.radioSeller.isChecked();
+                user.debt = binding.financialEdt.getText().toString();
+                user.isCreditor = binding.radioCreditor.isChecked();
+
+
+
                 Log.d("blur", "onCreateView: " + binding.radioSeller.isChecked());
                 ((MainActivity)getActivity()).insertUser(user);
                 Toast.makeText(getActivity(),"کاربر ثبت شد", Toast.LENGTH_SHORT).show();
