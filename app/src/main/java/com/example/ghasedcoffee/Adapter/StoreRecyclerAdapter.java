@@ -2,6 +2,7 @@ package com.example.ghasedcoffee.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,13 @@ public class StoreRecyclerAdapter extends RecyclerView.Adapter<StoreRecyclerAdap
         holder.binding.storeCommodity.setText( stores.get(position).commodity) ;
         holder.binding.storeUnit.setText(stores.get(position).unit);
         holder.binding.storeNumber.setText(stores.get(position).Amount);
+        holder.binding.changeBtn.setOnClickListener(view -> {
+            holder.binding.changeView.setVisibility(View.VISIBLE);
+            holder.binding.changeBtn.setVisibility(View.GONE);
+
+        });
+
+
 
     }
 

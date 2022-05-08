@@ -5,4 +5,6 @@ public class User {
     public String name ;
     public String phone;
     public Boolean isSeller;
+    public Boolean isCreditor;
+    public String debt;
 }

@@ -129,7 +129,7 @@ public class ReportFragment extends Fragment {
             financials.clear();
             String date = binding.startYear.getText().toString() + "-" + binding.startMonth.getText().toString() + "-" + binding.startDay.getText().toString();
 
-            financials = ((MainActivity) getActivity()).getFinancial(binding.startYear.getText().toString()+ "-"+ binding.startMonth.getText().toString() +"-"+ binding.startDay.getText().toString(), binding.endYear.getText().toString() +"-"+binding.endMonth.getText().toString()+"-"+ binding.endtDay.getText().toString());
+            financials.addAll (((MainActivity) getActivity()).getFinancial(binding.startYear.getText().toString()+ "-"+ binding.startMonth.getText().toString() +"-"+ binding.startDay.getText().toString(), binding.endYear.getText().toString() +"-"+binding.endMonth.getText().toString()+"-"+ binding.endtDay.getText().toString()));
             financialRecyclerAdapter.notifyDataSetChanged();
             Log.d("blur", "onCreateView: search object " + financials.size());
             toggle(binding.dateLay);

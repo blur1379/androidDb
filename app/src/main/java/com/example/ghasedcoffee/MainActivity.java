@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void  insertFinancial(Financial financial){
         Date c = Calendar.getInstance().getTime(); //Sat Apr 09 11:29:58 GMT+04:30 2022
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         todayDate = df.format(c); // 2022-4-9
 
         Log.d("blur", "onCreate date: " + todayDate);
@@ -79,5 +79,10 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Store> getStore(){
         return dbm.getStore();
     }
-
+    public void updateUser(String debt , Boolean isCreditor , String id){
+        dbm.updateUser(debt,isCreditor,id);
+    }
+    public void updateUser(String debt , String id){
+        dbm.updateStore(debt,id);
+    }
 }

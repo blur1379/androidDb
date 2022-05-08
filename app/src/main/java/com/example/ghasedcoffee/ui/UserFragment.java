@@ -30,6 +30,11 @@ public class UserFragment extends Fragment {
                 user.name = binding.userNameEdt.getText().toString();
                 user.phone = binding.userPhoneEdt.getText().toString();
                 user.isSeller = binding.radioSeller.isChecked();
+                user.debt = binding.financialEdt.getText().toString();
+                user.isCreditor = binding.radioCreditor.isChecked();
+
+
+
                 Log.d("blur", "onCreateView: " + binding.radioSeller.isChecked());
                 ((MainActivity)getActivity()).insertUser(user);
                 Toast.makeText(getActivity(),"کاربر ثبت شد", Toast.LENGTH_SHORT).show();

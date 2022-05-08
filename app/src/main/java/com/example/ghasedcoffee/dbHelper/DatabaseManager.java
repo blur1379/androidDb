@@ -30,6 +30,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static final String userPhone  = "phone" ;
     public static final String userIsSeller = "isSeller";
     public static final String userDebt = "debt";
+    public static final String userIsCreditor = "isCreditor";
     // store table
     public static final String StoreTableName = "tbl_store";
     public static final String storeID = "id";
@@ -48,7 +49,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String userQuery = "CREATE TABLE "+ UserTableName +" ("+ userID +" INTEGER PRIMARY KEY, "+ userName +" VARCHAR , "+ userPhone +" TEXT ,"+ userIsSeller +" BOOLEAN ,"+ userDebt +" INTEGER ); ";
+        String userQuery = "CREATE TABLE "+ UserTableName +" ("+ userID +" INTEGER PRIMARY KEY, "+ userName +" VARCHAR , "+ userPhone +" TEXT ,"+ userIsSeller +" BOOLEAN ,"+ userDebt +" INTEGER ," + userIsCreditor+ " BOOLEAN ); ";
         String storeQuery = "CREATE TABLE "+ StoreTableName +" ("+ storeID +" INTEGER PRIMARY KEY, "+ storeAmount +" DOUBLE , "+ storeUnit +" TEXT ," + storeCommodity + " VARCHAR ); ";
         String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDate +" TEXT); ";
         db.execSQL(userQuery);
@@ -71,6 +72,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         icv.put(userName , user.name);
         icv.put(userPhone, user.phone);
         icv.put(userIsSeller, user.isSeller);
+        icv.put(userDebt, user.debt);
+        icv.put(userIsCreditor, user.isCreditor);
         idb.insert(UserTableName,null,icv);
         idb.close();
         Log.d("blur", "insert user ");
@@ -112,7 +115,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
             user.id = gCur.getString(gCur.getColumnIndex(userID));
             user.name = gCur.getString(gCur.getColumnIndex(userName));
             user.phone = gCur.getString(gCur.getColumnIndex(userPhone));
+            user.debt = gCur.getString(gCur.getColumnIndex(userDebt));
             user.isSeller = gCur.getInt(gCur.getColumnIndex(userIsSeller)) > 0 ;
+            user.isCreditor= gCur.getInt(gCur.getColumnIndex(userIsCreditor)) > 0 ;
             Log.d("blurUser", "getUsers: " + " " + user.id + " " + user.name + " " + user.phone );
 
             users.add(user);
@@ -158,12 +163,30 @@ public class DatabaseManager extends SQLiteOpenHelper {
             financial.credit = gCur.getString(gCur.getColumnIndex(financialCredit));
             financial.type = gCur.getString(gCur.getColumnIndex(financialType));
             financial.date = gCur.getString(gCur.getColumnIndex(financialDate));
-
+            Log.d("blur", "getFinancialobj: " + financial.id);
             financials.add(financial);
 
             gCur.moveToNext();
         }
         return financials;
+    }
+
+    public void updateUser(String debt , Boolean isCreditor , String id){
+        SQLiteDatabase idb = this.getWritableDatabase();
+        ContentValues icv = new ContentValues();
+        icv.put(userDebt, debt);
+        icv.put(userIsCreditor, isCreditor);
+        idb.update(UserTableName,icv,"id = ?",new String[]{id});
+        idb.close();
+        Log.d("blur", "update user ");
+    }
+    public void updateStore(String debt , String id){
+        SQLiteDatabase idb = this.getWritableDatabase();
+        ContentValues icv = new ContentValues();
+        icv.put(storeAmount, debt);
+        idb.update(StoreTableName,icv,"id = ?",new String[]{id});
+        idb.close();
+        Log.d("blur", "insert user ");
     }
 
 }
