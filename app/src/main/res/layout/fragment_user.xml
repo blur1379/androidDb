@@ -62,7 +62,7 @@
                     android:inputType="phone"
                     android:padding="8dp" />
                 <EditText
-                    android:id="@+id/inancialEdt"
+                    android:id="@+id/financialEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"

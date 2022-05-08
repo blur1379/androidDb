@@ -41,9 +41,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static final String financialID = "id";
     public static final String financialCredit = "credit";
     public static final String financialType = "type";
-    public static final String financialDay = "day";
-    public static final String financialMonth = "month";
-    public static final String financialYear = "year";
+    public static final String financialDate = "date";
     public DatabaseManager(@Nullable Context context) {
         super(context, DatabaseName, null, Version);
     }
@@ -52,7 +50,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String userQuery = "CREATE TABLE "+ UserTableName +" ("+ userID +" INTEGER PRIMARY KEY, "+ userName +" VARCHAR , "+ userPhone +" TEXT ,"+ userIsSeller +" BOOLEAN ,"+ userDebt +" INTEGER ); ";
         String storeQuery = "CREATE TABLE "+ StoreTableName +" ("+ storeID +" INTEGER PRIMARY KEY, "+ storeAmount +" DOUBLE , "+ storeUnit +" TEXT ," + storeCommodity + " VARCHAR ); ";
-        String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDay + " INTEGER ," + financialMonth+ " INTEGER , "+ financialMonth+" INTEGER , "+ financialYear+" INTEGER); ";
+        String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDate +" TEXT); ";
         db.execSQL(userQuery);
         db.execSQL(storeQuery);
         db.execSQL(financialQuery);
@@ -94,9 +92,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         icv.put(financialID , financial.id);
         icv.put(financialCredit , financial.credit);
         icv.put(financialType, financial.type);
-        icv.put(financialDay, financial.day);
-        icv.put(financialMonth, financial.month);
-        icv.put(financialYear, financial.year);
+        icv.put(financialDate, financial.date);
+
         idb.insert(FinancialTableName,null,icv);
         idb.close();
     }
@@ -142,12 +139,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return stores;
     }
     @SuppressLint("Range")
-    public ArrayList<Financial> getFinancial(String startDay , String startMonth , String startYear , String endDay , String endMonth , String endYear){
+    public ArrayList<Financial> getFinancial(String startDate , String endDate ){
         ArrayList<Financial> financials = new ArrayList<>();
         SQLiteDatabase gdb = this.getReadableDatabase();
         String gQuery = "SELECT * FROM "+ FinancialTableName ;
-        if (!startDay.isEmpty() && !startMonth.isEmpty()&&!startYear.isEmpty() && !endDay.isEmpty()&&!endMonth.isEmpty() && !endYear.isEmpty()){
-                gQuery  += " WHERE "+ financialDay + "<= '"+endDay+"' AND "+financialDay + ">= '"+startDay+"' AND" + financialMonth + "<= '"+endMonth+"' AND "+financialMonth + ">= '"+startMonth+"' AND "+ financialYear + "<= '"+endDay+"' AND "+financialYear + ">= '"+startYear+"'";
+        if (!startDate.isEmpty() && !endDate.isEmpty()){
+                gQuery  += " WHERE "+ financialDate +" BETWEEN '"+ startDate +"' AND '"+endDate+"'";
         }
         gQuery += ";";
         Log.d("blur", "getFinancial: " + gQuery);
@@ -160,9 +157,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
             financial.id = gCur.getString(gCur.getColumnIndex(financialID));
             financial.credit = gCur.getString(gCur.getColumnIndex(financialCredit));
             financial.type = gCur.getString(gCur.getColumnIndex(financialType));
-            financial.day = gCur.getString(gCur.getColumnIndex(financialDay));
-            financial.month = gCur.getString(gCur.getColumnIndex(financialMonth));
-            financial.year = gCur.getString(gCur.getColumnIndex(financialYear));
+            financial.date = gCur.getString(gCur.getColumnIndex(financialDate));
+
             financials.add(financial);
 
             gCur.moveToNext();

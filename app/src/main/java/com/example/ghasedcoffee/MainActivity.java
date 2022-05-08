@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public DatabaseManager dbm;
     private String todayDate = "";
 
-    private int todayYear = 0;
-    private int todayMonth = 0;
-    private int todayDay = 0;
 
 
     @Override
@@ -64,24 +61,17 @@ public class MainActivity extends AppCompatActivity {
     }
     public void  insertFinancial(Financial financial){
         Date c = Calendar.getInstance().getTime(); //Sat Apr 09 11:29:58 GMT+04:30 2022
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
+        todayDate = df.format(c); // 2022-4-9
 
-        SimpleDateFormat dfYear = new SimpleDateFormat("yyyy", Locale.getDefault());
-        todayYear = Integer.parseInt(dfYear.format(c)); // 2020
-
-        SimpleDateFormat dfMonth = new SimpleDateFormat("M", Locale.getDefault());
-        todayMonth = Integer.parseInt(dfMonth.format(c)); // 4
-
-        SimpleDateFormat dfDay = new SimpleDateFormat("d", Locale.getDefault());
-        todayDay = Integer.parseInt(dfDay.format(c)); // 9
         Log.d("blur", "onCreate date: " + todayDate);
-        financial.day = String.valueOf(todayDay);
-        financial.month = String.valueOf(todayMonth);
-        financial.year = String.valueOf(todayYear);
+        financial.date = String.valueOf(todayDate);
+
         dbm.insertFinancial(financial);
     }
 
-    public ArrayList<Financial> getFinancial(String startDay , String startMonth , String startYear , String endDay , String endMonth , String endYear ){
-        return dbm.getFinancial(startDay , startMonth , startYear , endDay , endMonth , endYear);
+    public ArrayList<Financial> getFinancial(String startDate , String endDate ){
+        return dbm.getFinancial(startDate , endDate );
     }
     public void insertStore(Store store){
         dbm.insertStore(store);
