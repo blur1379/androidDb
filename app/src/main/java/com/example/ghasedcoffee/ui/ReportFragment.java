@@ -114,7 +114,7 @@ public class ReportFragment extends Fragment {
     public void setData() {
 
         users = ((MainActivity)getActivity()).getUser();
-        financials = ((MainActivity)getActivity()).getFinancial("","");
+        financials = ((MainActivity)getActivity()).getFinancial("","","","","","");
         stores = ((MainActivity)getActivity()).getStore();
     }
 
@@ -125,9 +125,10 @@ public class ReportFragment extends Fragment {
                 !binding.endtDay.getText().toString().isEmpty() &&
                 !binding.endMonth.getText().toString().isEmpty() &&
                 !binding.endYear.getText().toString().isEmpty()) {
+            financials.clear();
             String date = binding.startYear.getText().toString() + "-" + binding.startMonth.getText().toString() + "-" + binding.startDay.getText().toString();
 
-            financials = ((MainActivity) getActivity()).getFinancial(date, binding.endYear.getText().toString() + "-" + binding.endMonth.getText().toString() + "-" + binding.endtDay.getText().toString());
+            financials = ((MainActivity) getActivity()).getFinancial(binding.startDay.getText().toString() , binding.startMonth.getText().toString() , binding.startYear.getText().toString(), binding.endtDay.getText().toString()  ,binding.endMonth.getText().toString() , binding.endYear.getText().toString());
             financialRecyclerAdapter.notifyDataSetChanged();
             Log.d("blur", "onCreateView: search object " + financials.size());
         } else {

@@ -29,6 +29,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static final String userName  = "name" ;
     public static final String userPhone  = "phone" ;
     public static final String userIsSeller = "isSeller";
+    public static final String userDebt = "debt";
     // store table
     public static final String StoreTableName = "tbl_store";
     public static final String storeID = "id";
@@ -40,17 +41,18 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static final String financialID = "id";
     public static final String financialCredit = "credit";
     public static final String financialType = "type";
-    public static final String financialDate = "date";
-
+    public static final String financialDay = "day";
+    public static final String financialMonth = "month";
+    public static final String financialYear = "year";
     public DatabaseManager(@Nullable Context context) {
         super(context, DatabaseName, null, Version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String userQuery = "CREATE TABLE "+ UserTableName +" ("+ userID +" INTEGER PRIMARY KEY, "+ userName +" VARCHAR , "+ userPhone +" TEXT ,"+ userIsSeller +" BOOLEAN); ";
+        String userQuery = "CREATE TABLE "+ UserTableName +" ("+ userID +" INTEGER PRIMARY KEY, "+ userName +" VARCHAR , "+ userPhone +" TEXT ,"+ userIsSeller +" BOOLEAN ,"+ userDebt +" INTEGER ); ";
         String storeQuery = "CREATE TABLE "+ StoreTableName +" ("+ storeID +" INTEGER PRIMARY KEY, "+ storeAmount +" DOUBLE , "+ storeUnit +" TEXT ," + storeCommodity + " VARCHAR ); ";
-        String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDate + " TEXT ); ";
+        String financialQuery = "CREATE TABLE "+ FinancialTableName +" ("+ financialID +" INTEGER PRIMARY KEY, "+ financialCredit +" INTEGER , "+ financialType +" TEXT ," + financialDay + " INTEGER ," + financialMonth+ " INTEGER , "+ financialMonth+" INTEGER , "+ financialYear+" INTEGER); ";
         db.execSQL(userQuery);
         db.execSQL(storeQuery);
         db.execSQL(financialQuery);
@@ -92,7 +94,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         icv.put(financialID , financial.id);
         icv.put(financialCredit , financial.credit);
         icv.put(financialType, financial.type);
-        icv.put(financialDate, financial.date);
+        icv.put(financialDay, financial.day);
+        icv.put(financialMonth, financial.month);
+        icv.put(financialYear, financial.year);
         idb.insert(FinancialTableName,null,icv);
         idb.close();
     }
@@ -138,12 +142,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return stores;
     }
     @SuppressLint("Range")
-    public ArrayList<Financial> getFinancial(String date , String endDate){
+    public ArrayList<Financial> getFinancial(String startDay , String startMonth , String startYear , String endDay , String endMonth , String endYear){
         ArrayList<Financial> financials = new ArrayList<>();
         SQLiteDatabase gdb = this.getReadableDatabase();
         String gQuery = "SELECT * FROM "+ FinancialTableName ;
-        if (!date.isEmpty()|| !endDate.isEmpty()){
-                gQuery  += " WHERE "+ financialDate + "<= '"+endDate+"' AND "+financialDate + ">= '"+date+"'";
+        if (!startDay.isEmpty() && !startMonth.isEmpty()&&!startYear.isEmpty() && !endDay.isEmpty()&&!endMonth.isEmpty() && !endYear.isEmpty()){
+                gQuery  += " WHERE "+ financialDay + "<= '"+endDay+"' AND "+financialDay + ">= '"+startDay+"' AND" + financialMonth + "<= '"+endMonth+"' AND "+financialMonth + ">= '"+startMonth+"' AND "+ financialYear + "<= '"+endDay+"' AND "+financialYear + ">= '"+startYear+"'";
         }
         gQuery += ";";
         Log.d("blur", "getFinancial: " + gQuery);
@@ -156,9 +160,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
             financial.id = gCur.getString(gCur.getColumnIndex(financialID));
             financial.credit = gCur.getString(gCur.getColumnIndex(financialCredit));
             financial.type = gCur.getString(gCur.getColumnIndex(financialType));
-            financial.date = gCur.getString(gCur.getColumnIndex(financialDate));
+            financial.day = gCur.getString(gCur.getColumnIndex(financialDay));
+            financial.month = gCur.getString(gCur.getColumnIndex(financialMonth));
+            financial.year = gCur.getString(gCur.getColumnIndex(financialYear));
             financials.add(financial);
-            Log.d("blur", "getFinancial: " + financial.date);
+
             gCur.moveToNext();
         }
         return financials;
