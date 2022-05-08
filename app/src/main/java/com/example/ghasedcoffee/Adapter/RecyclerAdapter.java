@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ghasedcoffee.MainActivity;
 import com.example.ghasedcoffee.Model.User;
 import com.example.ghasedcoffee.databinding.ItemsRecyclerBinding;
 
@@ -45,6 +47,14 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
       holder.binding.changeBtn.setOnClickListener(view -> {
           holder.binding.changeBtn.setVisibility(View.GONE);
           holder.binding.itemChangeView.setVisibility(View.VISIBLE);
+      });
+      holder.binding.userSubmitBtn.setOnClickListener(v -> {
+          if (holder.binding.financialEdt.getText().toString().isEmpty()){
+              Toast.makeText(context,"لطفا فیلد ها را کامل کنید" , Toast.LENGTH_SHORT).show();
+          }else{
+
+
+          }
       });
     }
 

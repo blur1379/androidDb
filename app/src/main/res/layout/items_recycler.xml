@@ -75,7 +75,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/item_change_view"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:visibility="gone">
             <EditText
                 android:id="@+id/financialEdt"
                 android:layout_width="match_parent"
@@ -86,9 +87,6 @@
                 android:gravity="right"
                 android:inputType="number"
                 android:padding="8dp" />
-
-
-
             <RadioGroup
                 android:id="@+id/radio1"
                 android:layout_width="match_parent"
