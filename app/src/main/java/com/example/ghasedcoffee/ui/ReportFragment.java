@@ -51,13 +51,13 @@ public class ReportFragment extends Fragment {
         setData();
 
         //RecyclerView
-        adapter = new RecyclerAdapter(users);
+        adapter = new RecyclerAdapter(users,((MainActivity)getActivity()));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         binding.recycler.setAdapter(adapter);
         binding.recycler.setLayoutManager(layoutManager);
         binding.recycler.setHasFixedSize(true);
 
-        storeRecyclerAdapter = new StoreRecyclerAdapter(stores);
+        storeRecyclerAdapter = new StoreRecyclerAdapter(stores , ((MainActivity)getActivity()));
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL , false);
         binding.storeRecycler.setAdapter(storeRecyclerAdapter);
         binding.storeRecycler.setLayoutManager(layoutManager1);

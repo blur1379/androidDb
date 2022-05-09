@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateUser(String debt , Boolean isCreditor , String id){
         dbm.updateUser(debt,isCreditor,id);
     }
-    public void updateUser(String debt , String id){
+    public void updateStore(String debt , String id){
         dbm.updateStore(debt,id);
     }
 }

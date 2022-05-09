@@ -152,7 +152,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 gQuery  += " WHERE "+ financialDate +" BETWEEN '"+ startDate +"' AND '"+endDate+"'";
         }
         gQuery += ";";
-        Log.d("blur", "getFinancial: " + gQuery);
 
 
         Cursor gCur = gdb.rawQuery(gQuery,null);

@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ghasedcoffee.MainActivity;
 import com.example.ghasedcoffee.Model.Financial;
 import com.example.ghasedcoffee.Model.Store;
 import com.example.ghasedcoffee.databinding.ItemStoreRecyclerBinding;
@@ -19,9 +21,9 @@ public class StoreRecyclerAdapter extends RecyclerView.Adapter<StoreRecyclerAdap
 
     private ArrayList<Store> stores;
     private Context context  ;
-
-    public StoreRecyclerAdapter(ArrayList<Store> stores){
-
+    private MainActivity activity;
+    public StoreRecyclerAdapter(ArrayList<Store> stores , MainActivity activity){
+    this.activity = activity;
         this.stores = stores;
     }
 
@@ -45,6 +47,16 @@ public class StoreRecyclerAdapter extends RecyclerView.Adapter<StoreRecyclerAdap
             holder.binding.changeView.setVisibility(View.VISIBLE);
             holder.binding.changeBtn.setVisibility(View.GONE);
 
+        });
+        holder.binding.SubmitBtn.setOnClickListener(v -> {
+            if (holder.binding.numEdt.getText().toString().isEmpty()){
+                Toast.makeText(context,"لطفا فیلد ها را کامل کنید" , Toast.LENGTH_SHORT).show();
+            }else{
+                activity.updateStore(holder.binding.numEdt.getText().toString(),stores.get(position).id);
+                holder.binding.changeBtn.setVisibility(View.VISIBLE);
+                holder.binding.changeView.setVisibility(View.GONE);
+                Toast.makeText(context,"مقدار وارد شد" , Toast.LENGTH_SHORT).show();
+            }
         });
 
 

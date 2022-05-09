@@ -19,9 +19,9 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
 
     private ArrayList<User> users;
     private Context context  ;
-
-    public RecyclerAdapter(ArrayList<User> users){
-
+    private MainActivity activity;
+    public RecyclerAdapter(ArrayList<User> users , MainActivity activity){
+        this.activity=activity;
         this.users = users;
     }
 
@@ -52,8 +52,10 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
           if (holder.binding.financialEdt.getText().toString().isEmpty()){
               Toast.makeText(context,"لطفا فیلد ها را کامل کنید" , Toast.LENGTH_SHORT).show();
           }else{
-
-
+              activity.updateUser(holder.binding.financialEdt.getText().toString(),holder.binding.radioCreditor.isChecked(),users.get(position).id);
+              holder.binding.changeBtn.setVisibility(View.VISIBLE);
+              holder.binding.itemChangeView.setVisibility(View.GONE);
+              Toast.makeText(context,"مقدار وارد شد" , Toast.LENGTH_SHORT).show();
           }
       });
     }
